@@ -3,7 +3,7 @@ import math
 def Main(operation, dec_num, input_base, output_base):
     if operation == '+':
         bit = int(input("Введите количество байт: ")) 
-        return vnutri(int(dec_num, input_base), bit)
+        return vnytri(int(dec_num, input_base), bit)
     elif operation == '-':
         return Base(input_base, int(dec_num, input_base), output_base)
     else:
@@ -14,13 +14,13 @@ def Bit(bit):
 
 def Base(input_base, dec_num, output_base):
     if output_base == 2:
-        return int_dva(dec_num)
+        return int_2(dec_num)
     elif output_base == 8:
-        return int_vosem(dec_num)
+        return int_8(dec_num)
     elif output_base == 10:
-        return int_conv(dec_num)
+        return int_10(dec_num)
     elif output_base == 16:
-        return int_shestnadtsat(dec_num)
+        return int_16(dec_num)
     else:
         return "Некорректное основание СС."
 
@@ -28,10 +28,10 @@ def Start(input_base, output_base):
     if input_base < 2 or input_base > 16 or output_base < 2 or output_base > 16:
         return "Основание СС должно быть 2, 8, 10 или 16."
 
-def int_conv(dec_num):
+def int_10(dec_num):
     return str(dec_num)
 
-def int_dva(dec_num):
+def int_2(dec_num):
     quotient = int(dec_num)
     result = ""
     while quotient > 1:
@@ -40,7 +40,7 @@ def int_dva(dec_num):
     result = str(quotient) + result
     return result or "0"
 
-def int_vosem(dec_num):
+def int_8(dec_num):
     quotient = int(dec_num)
     result = ""
     while quotient > 0:
@@ -48,7 +48,7 @@ def int_vosem(dec_num):
         quotient //= 8
     return result or "0"
 
-def int_shestnadtsat(number):  # Шестнадцатеричная СС
+def int_16(number):
     alf = {
         0: "0", 
         1: "1", 
@@ -75,7 +75,7 @@ def int_shestnadtsat(number):  # Шестнадцатеричная СС
         number //= 16
     return result
 
-def vnutri(dec_num, bit):
+def vnytri(dec_num, bit):
     line = len(Bit(bit))
     binary_num = int_dva(dec_num)
     return binary_num.zfill(line)
@@ -98,7 +98,7 @@ def add_one(binary_str):
 
 def invert(dec_num, bit):
     line = len(Bit(bit))
-    inverted = int_dva(dec_num)
+    inverted = int_2(dec_num)
     inverted = ''.join('1' if char == '0' else '0' for char in inverted)
     inverted_with_one = add_one(inverted)
     return inverted_with_one.zfill(line)
@@ -110,11 +110,11 @@ if __name__ == "__main__":
 
     if operation == '+':
         bit = int(input("Введите количество байт: ")) 
-        minus = input("Число является отрицательным, если ДА то '-' если НЕТ то '+': ")
-        if minus == '-':
+        minus = input("Число является отрицательным, если ДА то '+' если НЕТ то '-': ")
+        if minus == '+':
             print(invert(int(dec_num, input_base), bit))
         else:
-            print(vnutri(int(dec_num, input_base), bit))
+            print(vnytri(int(dec_num, input_base), bit))
     elif operation == '-':
         output_base = int(input("Введите СС, в которую хотите преобразовать 2, 8, 10, 16: "))
         print(Main(operation, dec_num, input_base, output_base))
