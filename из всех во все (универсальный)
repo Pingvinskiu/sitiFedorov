@@ -30,7 +30,7 @@ def int_dva(number):  # Двоичная СС
         number //= 2
     return result
 
-def int_vosem(number):  # Восьмеричная СС
+def int_vosem(number):  # Восмеричная СС
     if number == 0:
         return "0"
     result = ""
